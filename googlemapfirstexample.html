@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Google Map</h1>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+<script>
+
+function googleMapV1() 
+{
+    var mapProp= {center:new google.maps.LatLng(51.508742,-0.120850), zoom:10};
+    
+    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+
+    var myLatLng1 = {lat: 51.518622, lng: -0.094744};
+
+    //51.518622, -0.094744  // Barbican Estate, London, UK
+
+    var marker = new google.maps.Marker({
+          position: myLatLng1,
+          map: map,
+          title: 'Barbican Estate, London, UK'
+        });
+
+    
+            //51.5185549,-0.11178 // Charles Dickens Museum, London, UK
+
+    var myLatLng2 = {lat: 51.5185549, lng: -0.11178};
+
+
+
+    var marker = new google.maps.Marker({
+        position: myLatLng2,
+        map: map,
+        title: 'Charles Dickens Museum, London, UK'
+        });
+
+}
+
+
+function googleMapV2()
+{
+
+
+    var locations = [
+        ['Barbican Estate, London, UK',51.518622,-0.094744],
+        ['Charles Dickens Museum, London, UK',51.5185549,-0.11178],
+        ['Wembley Stadium', 51.556241, -0.279605]
+    ];
+
+    //alert(locations);
+
+
+    var mapProp= {center:new google.maps.LatLng(51.508742,-0.120850), zoom:10};
+    
+    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+    var i, marker;
+
+
+    for (i = 0; i < locations.length; i++) {
+
+marker = new google.maps.Marker({
+    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+    map: map
+});
+
+//  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+//      return function() {
+//      infowindow.setContent(locations[i][0]);
+//      infowindow.open(map, marker);
+//      }
+//  })(marker, i));
+}
+     
+
+
+}
+
+
+</script>
+<!--
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+-->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRvbqnxgzzLSdEDkRKVJPhJKKGzkmLRvQ&callback=googleMapV2" async defer></script>
+
+</body>
+</html>
