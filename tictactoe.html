@@ -30,7 +30,6 @@ div.center
     margin-top: 100px;
 }
 
-
 table.center {
     margin-left:auto; 
     margin-right:auto;
@@ -50,52 +49,82 @@ table.center {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="libraryjs/common/User.js"></script>
 
-
-
 <script type="text/javascript">
 
-  
-    // var car = {type:"Fiat", model:"500", color:"white"};
-
-
-    // Usage:
-    //let user = new User("John");
-    //user.MyNameIs();
-
-
-    
-
-   $(document).ready(function()  {
-
-   // document.getElementById("btn1").style.background='#000000';
-    //document.getElementById('btn2').style.background = HexString();
-
-    //$("button").css("background-color", HexCode());
-
-
-    // for (i = 0; i < 100000; i++) { 
-
-    //     $("button").each(function(index)   {
-    //         $(this).css("background-color", HexCode());
-    //     });
-
-    //     $('#parentOfElementToBeRedrawn').hide().show(0);
-
-    //   }
+  var current = "X";
+   
+  $(document).ready(function()  {
 
         Reset();
        
-
   });
 
+  
+  function LockAndStart(toggle){
+
+    $("#player1").prop('disabled', toggle);
+    $("#player2").prop('disabled', toggle);
+
+  }
+
+  function FlipPlayer(mark){
+
+    if (mark === "O"){
+
+      return "X"
+    }
+    else{
+
+      return "O";
+    }
+
+  }
+
+
+  function MarkSquare(mark, buttonid){
+
+    //TODO: only mark if not previously marked
+
+      $('#'+ buttonid).text(mark);
+      current = FlipPlayer(mark);
+
+      CheckForWinner();
+
+  }
+
+
+  function CheckForWinner(){
+
+    // vertical winners - 1,4,7; 2,5,8; 3,6,9  
+    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn4").text() &&  $("#btn4").text() == $("#btn7").text())
+    {
+        alert($("#btn1").text() + " is the winner");    
+    }
+    else if ($("#btn2").text().length != 0 && $("#btn2").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn8").text())
+    { 
+        alert($("#btn2").text() + " is the winner");    
+    }
+    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn6").text() &&  $("#btn6").text() == $("#btn9").text())
+    {
+        alert($("#btn3").text() + " is the winner");    
+    }
+  
+
+    // hortizon winners - 1,2,3; 4,5,6; 7,8,9
+
+    // diagonal winners - 1,5,9; 3,5,7
+  }
 
 
   function Reset(){
 
     $("button").not("#btnReset").not("#btnStart").each(function()   {
             $(this).css("background-color", HexCode());
-            $(this).text("");
+           // $(this).text("");
         });
+
+    LockAndStart(false);
+
   }
 
 
@@ -113,19 +142,19 @@ table.center {
     <div>
         <table class="center">
                 <tr>
-                  <td><button id="btn1" class="btn-ttt"></button></td>
-                  <td><button id="btn2" class="btn-ttt"></button></td> 
-                  <td><button id="btn3" class="btn-ttt"></button></td>
+                  <td><button id="btn1" class="btn-ttt" onclick="MarkSquare(current,'btn1')"></button></td>
+                  <td><button id="btn2" class="btn-ttt" onclick="MarkSquare(current,'btn2')"></button></td> 
+                  <td><button id="btn3" class="btn-ttt" onclick="MarkSquare(current,'btn3')"></button></td>
                 </tr>
                 <tr>
-                  <td><button id="btn4" class="btn-ttt"></button></td>
-                  <td><button id="btn5" class="btn-ttt"></button></td> 
-                  <td><button id="btn6" class="btn-ttt"></button></td>
+                  <td><button id="btn4" class="btn-ttt" onclick="MarkSquare(current,'btn4')"></button></td>
+                  <td><button id="btn5" class="btn-ttt" onclick="MarkSquare(current,'btn5')"></button></td> 
+                  <td><button id="btn6" class="btn-ttt" onclick="MarkSquare(current,'btn6')"></button></td>
                 </tr>
                 <tr>
-                  <td><button id="btn7" class="btn-ttt"></button></td>
-                  <td><button id="btn8" class="btn-ttt"></button></td> 
-                  <td><button id="btn9" class="btn-ttt"></button></td>
+                  <td><button id="btn7" class="btn-ttt" onclick="MarkSquare(current,'btn7')"></button></td>
+                  <td><button id="btn8" class="btn-ttt" onclick="MarkSquare(current,'btn8')"></button></td> 
+                  <td><button id="btn9" class="btn-ttt" onclick="MarkSquare(current,'btn9')"></button></td>
                 </tr>               
         </table>
     </div>
@@ -133,9 +162,9 @@ table.center {
 
     <div id="control" class="center"> 
 
-      Player 1 Name <input type="text"/>
-      Player 2 Name <input type="text"/>
-      <button id="btnStart" class="btn btn-primary" onclick="Reset()">Start</button>
+      Player 1 (X) <input type="text" id="player1"/>
+      Player 2 (O) <input type="text" id="player2"/>
+      <button id="btnStart" class="btn btn-primary" onclick="LockAndStart(true)">Start</button>
       <button id="btnReset" class="btn btn-primary" onclick="Reset()">Reset</button>
 
     </div>
