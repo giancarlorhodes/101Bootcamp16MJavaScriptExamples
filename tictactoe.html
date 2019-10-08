@@ -7,11 +7,15 @@
 <style>
 
 .btn-ttt {
-    border: 1px outset blue;
+   /* border: 1px outset blue; */
     background-color: lightBlue;
     height:100px;
     width:100px;
     cursor:pointer;
+    border: 0 outset blue;
+    padding: 0;
+    margin-left: 0px;
+    margin-right: 0px; float: left;
 }
 
 .btn-ttt:hover {
@@ -19,29 +23,122 @@
     color:white;
 }
 
+div.center
+{ 
+    margin-left:25%; 
+    margin-right: auto; float: left;
+    margin-top: 100px;
+}
+
+
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 100px;
+  }
+
+
 </style>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="libraryjs/common/User.js"></script>
+
+
+
+<script type="text/javascript">
+
+  
+    // var car = {type:"Fiat", model:"500", color:"white"};
+
+
+    // Usage:
+    //let user = new User("John");
+    //user.MyNameIs();
+
+
+    
+
+   $(document).ready(function()  {
+
+   // document.getElementById("btn1").style.background='#000000';
+    //document.getElementById('btn2').style.background = HexString();
+
+    //$("button").css("background-color", HexCode());
+
+
+    // for (i = 0; i < 100000; i++) { 
+
+    //     $("button").each(function(index)   {
+    //         $(this).css("background-color", HexCode());
+    //     });
+
+    //     $('#parentOfElementToBeRedrawn').hide().show(0);
+
+    //   }
+
+        Reset();
+       
+
+  });
+
+
+
+  function Reset(){
+
+    $("button").not("#btnReset").not("#btnStart").each(function()   {
+            $(this).css("background-color", HexCode());
+            $(this).text("");
+        });
+  }
+
+
+  function HexCode(){
+
+    return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+
+  }
+
+</script>
 
 
 </head> 
-<body>
-      
-        <table>
+<body>     
+    <div>
+        <table class="center">
                 <tr>
-                  <td><button class="btn-ttt">1</button></td>
-                  <td><button class="btn-ttt">2</button></td> 
-                  <td><button>3</button></td>
+                  <td><button id="btn1" class="btn-ttt"></button></td>
+                  <td><button id="btn2" class="btn-ttt"></button></td> 
+                  <td><button id="btn3" class="btn-ttt"></button></td>
                 </tr>
                 <tr>
-                  <td> <button>4</button></td>
-                  <td> <button>5</button></td> 
-                  <td> <button>6</button></td>
+                  <td><button id="btn4" class="btn-ttt"></button></td>
+                  <td><button id="btn5" class="btn-ttt"></button></td> 
+                  <td><button id="btn6" class="btn-ttt"></button></td>
                 </tr>
                 <tr>
-                  <td> <button>7</button></td>
-                  <td> <button>8</button></td> 
-                  <td> <button>9</button></td>
-                </tr>
+                  <td><button id="btn7" class="btn-ttt"></button></td>
+                  <td><button id="btn8" class="btn-ttt"></button></td> 
+                  <td><button id="btn9" class="btn-ttt"></button></td>
+                </tr>               
         </table>
+    </div>
+<br/>
+
+    <div id="control" class="center"> 
+
+      Player 1 Name <input type="text"/>
+      Player 2 Name <input type="text"/>
+      <button id="btnStart" class="btn btn-primary" onclick="Reset()">Start</button>
+      <button id="btnReset" class="btn btn-primary" onclick="Reset()">Reset</button>
+
+    </div>
                   
 </body>
 </html>
