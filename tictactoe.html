@@ -83,12 +83,37 @@ table.center {
 
   function MarkSquare(mark, buttonid){
 
-    //TODO: only mark if not previously marked
-
+ 
       $('#'+ buttonid).text(mark);
+      $('#'+ buttonid).prop('disabled', true);
       current = FlipPlayer(mark);
 
-      CheckForWinner();
+      var winner = CheckForWinner();
+
+      if (winner.length != 0)
+      {
+       
+        if (winner == "X")
+        {
+            alert("Player 1 (X) is the winner!!!!");
+        }
+        else
+        {
+            alert("Player 2 (O) is the winner!!!!");
+        }
+
+        DisableGrid();
+
+      }
+
+  }
+
+
+  function DisableGrid(){
+
+    $("button").not("#btnReset").not("#btnStart").each(function()   {        
+            $(this).prop("disabled", true);
+    });
 
   }
 
@@ -98,21 +123,41 @@ table.center {
     // vertical winners - 1,4,7; 2,5,8; 3,6,9  
     if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn4").text() &&  $("#btn4").text() == $("#btn7").text())
     {
-        alert($("#btn1").text() + " is the winner");    
+        return $("#btn1").text();    
     }
     else if ($("#btn2").text().length != 0 && $("#btn2").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn8").text())
     { 
-        alert($("#btn2").text() + " is the winner");    
+        return $("#btn2").text();    
     }
     else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn6").text() &&  $("#btn6").text() == $("#btn9").text())
     {
-        alert($("#btn3").text() + " is the winner");    
+        return $("#btn3").text();    
+    }     // hortizon winners - 1,2,3; 4,5,6; 7,8,9
+    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn2").text() &&  $("#btn2").text() == $("#btn3").text())
+    {
+        return $("#btn1").text();    
+    }
+    else if ($("#btn4").text().length != 0 && $("#btn4").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn6").text())
+    { 
+        return $("#btn4").text();    
+    }
+    else if ($("#btn7").text().length != 0 && $("#btn7").text() == $("#btn8").text() &&  $("#btn8").text() == $("#btn9").text())
+    {
+        return $("#btn7").text();    
+    }  // diagonal winners - 1,5,9; 3,5,7
+    else if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn9").text())
+    { 
+        return $("#btn1").text();    
+    }
+    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn7").text())
+    {
+        return $("#btn3").text();    
+    }
+    else 
+    {
+      return "";
     }
   
-
-    // hortizon winners - 1,2,3; 4,5,6; 7,8,9
-
-    // diagonal winners - 1,5,9; 3,5,7
   }
 
 
@@ -120,11 +165,13 @@ table.center {
 
     $("button").not("#btnReset").not("#btnStart").each(function()   {
             $(this).css("background-color", HexCode());
-           // $(this).text("");
-        });
+            $(this).text("");
+            $(this).prop("disabled", false);
+    });
 
-    LockAndStart(false);
-
+     LockAndStart(false);
+     $("#player1").val(""); 
+     $("#player2").val("");  
   }
 
 
