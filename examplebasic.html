@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+
+    <style>
+    </style>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+// this is jquery
+$(document).ready(function()  {
+     Reset();
+});
+
+// this is vanilla javascript
+function Reset()
+{
+    
+    // set all button text to _
+   
+    // clear the names of the players
+    document.getElementById('inputplayer1').value = "";
+    document.getElementById('inputplayer2').value = "";
+
+}
+
+</script>
+
+</head>
+
+<html>
+<body>  
+   
+    <!-- a html comment-->
+    <h1>Tic Tac Toe</h1>
+    <br/>
+
+    <button type="button" id="button1" onclick="">O</button>  
+    <button type="button" id="button2" onclick="">O</button>  
+    <button type="button" id="button3" onclick="">X</button> 
+    <br/>
+    <button type="button" id="button4" onclick="">_</button>  
+    <button type="button" id="button5" onclick="">X</button>  
+    <button type="button" id="button6" onclick="">_</button> 
+    <br/>
+    <button type="button" id="button7" onclick="">_</button>  
+    <button type="button" id="button8" onclick="">_</button>  
+    <button type="button" id="button9" onclick="">_</button> 
+  
+    <br/>
+    <br/>
+    <br/>
+
+    <label for="player1" id="lblplayer1">Enter the name for the first player</label><input type="text" name="player1name" id="inputplayer1">
+    <label for="player1" id="lblplayer2">Enter the name for the second player</label><input type="text" name="player2name" id="inputplayer2">
+    <button id="btnStart" class="btn btn-primary" onclick="">Start</button>
+    <button id="btnReset" class="btn btn-primary" onclick="Reset()">Reset</button>
+
+
+</body>
+</html>

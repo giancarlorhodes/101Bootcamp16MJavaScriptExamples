@@ -13,6 +13,10 @@
     width:100px;
     cursor:pointer;
     border: 0 outset blue;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
     padding: 0;
     margin-left: 0px;
     margin-right: 0px; float: left;
@@ -55,15 +59,21 @@ table.center {
    
   $(document).ready(function()  {
 
+
+        DisableGrid(true);
         Reset();
        
   });
 
+ 
+
   
-  function LockAndStart(toggle){
+  function Start(toggle){
 
     $("#player1").prop('disabled', toggle);
     $("#player2").prop('disabled', toggle);
+
+    DisableGrid(false);
 
   }
 
@@ -102,17 +112,19 @@ table.center {
             alert("Player 2 (O) is the winner!!!!");
         }
 
-        DisableGrid();
+        DisableGrid(true);
 
       }
 
   }
 
 
-  function DisableGrid(){
-
-    $("button").not("#btnReset").not("#btnStart").each(function()   {        
-            $(this).prop("disabled", true);
+  function DisableGrid(flag){
+    
+    $("button").not("#btnReset").not("#btnStart").each(function()   
+    {        
+            $(this).prop("disabled", flag);
+  
     });
 
   }
@@ -121,35 +133,43 @@ table.center {
   function CheckForWinner(){
 
     // vertical winners - 1,4,7; 2,5,8; 3,6,9  
-    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn4").text() &&  $("#btn4").text() == $("#btn7").text())
+    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn4").text() 
+                &&  $("#btn4").text() == $("#btn7").text())
     {
         return $("#btn1").text();    
     }
-    else if ($("#btn2").text().length != 0 && $("#btn2").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn8").text())
+    else if ($("#btn2").text().length != 0 && $("#btn2").text() == $("#btn5").text() 
+                &&  $("#btn5").text() == $("#btn8").text())
     { 
         return $("#btn2").text();    
     }
-    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn6").text() &&  $("#btn6").text() == $("#btn9").text())
+    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn6").text() 
+                &&  $("#btn6").text() == $("#btn9").text())
     {
         return $("#btn3").text();    
     }     // hortizon winners - 1,2,3; 4,5,6; 7,8,9
-    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn2").text() &&  $("#btn2").text() == $("#btn3").text())
+    if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn2").text() 
+                &&  $("#btn2").text() == $("#btn3").text())
     {
         return $("#btn1").text();    
     }
-    else if ($("#btn4").text().length != 0 && $("#btn4").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn6").text())
+    else if ($("#btn4").text().length != 0 && $("#btn4").text() == $("#btn5").text() 
+                &&  $("#btn5").text() == $("#btn6").text())
     { 
         return $("#btn4").text();    
     }
-    else if ($("#btn7").text().length != 0 && $("#btn7").text() == $("#btn8").text() &&  $("#btn8").text() == $("#btn9").text())
+    else if ($("#btn7").text().length != 0 && $("#btn7").text() == $("#btn8").text() 
+                &&  $("#btn8").text() == $("#btn9").text())
     {
         return $("#btn7").text();    
     }  // diagonal winners - 1,5,9; 3,5,7
-    else if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn9").text())
+    else if ($("#btn1").text().length != 0 && $("#btn1").text() == $("#btn5").text() 
+                &&  $("#btn5").text() == $("#btn9").text())
     { 
         return $("#btn1").text();    
     }
-    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn5").text() &&  $("#btn5").text() == $("#btn7").text())
+    else if ($("#btn3").text().length != 0 && $("#btn3").text() == $("#btn5").text() 
+                &&  $("#btn5").text() == $("#btn7").text())
     {
         return $("#btn3").text();    
     }
@@ -163,28 +183,37 @@ table.center {
 
   function Reset(){
 
-    $("button").not("#btnReset").not("#btnStart").each(function()   {
-            $(this).css("background-color", HexCode());
-            $(this).text("");
-            $(this).prop("disabled", false);
-    });
+      $("button").not("#btnReset").not("#btnStart").each(function()   {
+              $(this).css("background-color", HexCode());
+              $(this).text("");
+      });
 
-     LockAndStart(false);
-     $("#player1").val(""); 
-     $("#player2").val("");  
+      
+      $("#player1").val("").prop("disabled", false);
+      $("#player2").val("").prop("disabled", false);
   }
 
 
-  function HexCode(){
+  function HexCode()
+  {
 
-    return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    //return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    //return '#7aa2cc';
+    //return '#102ce3';
+    return '#007bff';
 
   }
 
 </script>
 
 
+
+<!--   THIS IS THE HTML  FOR THE PAGE-->
+
+
+
 </head> 
+
 <body>     
     <div>
         <table class="center">
@@ -209,9 +238,9 @@ table.center {
 
     <div id="control" class="center"> 
 
-      Player 1 (X) <input type="text" id="player1"/>
-      Player 2 (O) <input type="text" id="player2"/>
-      <button id="btnStart" class="btn btn-primary" onclick="LockAndStart(true)">Start</button>
+      <label for="lblplayer1" id="lblplayer1">Enter player one name. Player one will be "X's"</label><input type="text" id="player1"/>
+      <lable for="lblplayer2" id="lblplayer2">Enter player two name. Player two will be "O's"</lable><input type="text" id="player2"/>
+      <button id="btnStart" class="btn btn-primary" onclick="Start(true)">Start</button>
       <button id="btnReset" class="btn btn-primary" onclick="Reset()">Reset</button>
 
     </div>
