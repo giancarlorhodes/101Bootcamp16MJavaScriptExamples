@@ -12,6 +12,4 @@ class Car
       this.Color = iColor;
     }
 
-  
-
 }
