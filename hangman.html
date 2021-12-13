@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ 
+  <head>
+
+    <title>Hangman</title>
+    <script>
+            // document.getElementById('guess').value = '';
+            var pat = /^[a-z]+$/;
+            var x = 10;
+            var y = "string";
+
+            function checkIsletter(guess)
+            {            
+              const result = new RegExp(pat, 'g').test(guess); // here I have used 'g' which means global search
+              console.log(result); // true if it matched, false if it doesn't
+              alert(result);
+            }
+
+            //const regExpStr = "^([a-z0-9]{5,})$"
+            //const result = new RegExp(pat, 'g').test("Your string") // here I have used 'g' which means global search
+            //console.log(result) // true if it matched, false if it doesn't
+    </script>
+  </head>
+<body>
+
+<br/>
+
+  <label>Word:  </label>
+  <input type="password" id="answer" />
+  <button type="button" onclick="alert(document.getElementById('answer').value)">Test</button>
+  <button type="button" onclick="document.getElementById('answer').value = ''">Clear</button>
+  <!--  comment in html  -->
+  <br/>
+  <label>Guess a letter:  </label>
+  <input type="text" id="guess" placeholder="enter a letter" maxlength="1" />
+  <button type="button" onclick="checkIsletter(document.getElementById('guess').value)">Submit</button>
+  <br/><label>Guesses:  </label><label id="guesses">a,f,x,z</label>
+  <br/><label>Game status:  </label><label id="status">GALLOW, HEAD, BODY, LEFT ARM, RIGHT ARM, LEFT LEG, RIGHT LEG, NOOSE (YOU'RE DEAD!!!)</label>
+
+</body>
+</html>
