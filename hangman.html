@@ -6,15 +6,119 @@
     <title>Hangman</title>
     <script>
             // document.getElementById('guess').value = '';
-            var pat = /^[a-z]+$/;
+            var pat = /^[a-zA-Z]+$/;
             var x = 10;
             var y = "string";
+            var _wrong_count = 0; // you get 7 chances, you die on the 8th !!!
+            var _guess_count = 0;
 
-            function checkIsletter(guess)
+            function checkisletter(guess)
             {            
-              const result = new RegExp(pat, 'g').test(guess); // here I have used 'g' which means global search
-              console.log(result); // true if it matched, false if it doesn't
-              alert(result);
+              const _result = new RegExp(pat, 'g').test(guess); // here I have used 'g' which means global search
+              //console.log(result); // true if it matched, false if it doesn't
+              //alert(result);
+              return _result;
+            }
+
+            function resethangman()
+            {
+
+              document.getElementById('answer').value = '';
+              document.getElementById('guess').value = '';
+              document.getElementById('guesses').innerHTML = '';
+              document.getElementById('status').innerHTML = '';
+              _wrong_count = 0; // you get 7 chances, you die on the 8th !!!
+              _guess_count = 0;
+
+            }
+
+            function updatehangman()
+            {
+
+                // check if guess is part of answer
+                let _word = document.getElementById('answer').value;
+                let _current_guess = document.getElementById('guess').value
+                let _check = _word.search(_current_guess);
+                let _match = "MATCH: ";
+
+                // if not, update status and increment death counter
+                if (_check === - 1) 
+                {
+                  _wrong_count =  _wrong_count + 1;
+                  switch (_wrong_count)
+                  {
+                      case 1:
+                        document.getElementById('status').innerHTML = "GALLOW";
+                        break;
+                      case 2:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML 
+                        + ", HEAD";
+                        break;
+                      case 3:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML 
+                        + ", BODY";
+                        break;
+                      case 4:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML
+                        + ", LEFT ARM";
+                        break;
+                      case 5:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML
+                        + ", RIGHT ARM";
+                        break;
+                      case 6:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML
+                        + ", LEFT LEG";
+                        break;
+                      case 7:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML
+                        + ", RIGHT LEG";
+                        break;
+                      case 8:
+                        document.getElementById('status').innerHTML = document.getElementById('status').innerHTML
+                        + ", NOOSE (YOU'RE DEAD!!!)";
+                        break;
+                  }                  
+                }
+                else // if yes, then update MATCH
+                {
+                     
+              
+                }
+              
+            }
+
+            function gameloop()
+            {
+
+              let _check = checkisletter(document.getElementById('guess').value);
+             
+              console.log(_check);
+              console.log(_guess_count);
+              if (_check === true) 
+              {  
+                  _guess_count = _guess_count + 1;
+                  // TODO: add to guesses, update hangman
+                  if (_guess_count === 1)
+                  {
+
+                      document.getElementById('guesses').innerHTML = 
+                      document.getElementById('guess').value;
+                      updatehangman();
+                  }
+                  else
+                  {
+                      document.getElementById('guesses').innerHTML = 
+                      document.getElementById('guesses').innerHTML + ',' + 
+                      document.getElementById('guess').value;
+                      updatehangman();
+                  }
+              }
+              else
+              { 
+                alert("only letters are allowed");
+              }
+              document.getElementById('guess').value = '';
             }
 
             //const regExpStr = "^([a-z0-9]{5,})$"
@@ -28,15 +132,15 @@
 
   <label>Word:  </label>
   <input type="password" id="answer" />
-  <button type="button" onclick="alert(document.getElementById('answer').value)">Test</button>
-  <button type="button" onclick="document.getElementById('answer').value = ''">Clear</button>
+  <button type="button" onclick="alert(document.getElementById('answer').value)">Show Word</button>
+  <button type="button" onclick="resethangman()">Reset Game</button>
   <!--  comment in html  -->
   <br/>
   <label>Guess a letter:  </label>
   <input type="text" id="guess" placeholder="enter a letter" maxlength="1" />
-  <button type="button" onclick="checkIsletter(document.getElementById('guess').value)">Submit</button>
-  <br/><label>Guesses:  </label><label id="guesses">a,f,x,z</label>
-  <br/><label>Game status:  </label><label id="status">GALLOW, HEAD, BODY, LEFT ARM, RIGHT ARM, LEFT LEG, RIGHT LEG, NOOSE (YOU'RE DEAD!!!)</label>
+  <button type="button" onclick="gameloop()">Submit</button>
+  <br/><label>Guesses:  </label><label id="guesses"></label>
+  <br/><label>Game status:  </label><label id="status"></label>
 
 </body>
 </html>
