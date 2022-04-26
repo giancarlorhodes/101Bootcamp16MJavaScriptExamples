@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+ 
+  <head>
+
+    <title>Hello World JavaScript</title>
+    <script>
+            // declare some variables;
+            let _todays_date = new Date().toLocaleString();
+            //let _name = document.getElementById('name').value; // undefined initially
+
+
+            function PrintName(inputName)
+            {
+                // debugging
+                // debugger;
+                // console.log(_s);
+                // console.log(typeof _s);
+                
+                // print out "Hello XXX, Today is  Today's Day. Have a good day."
+                let theString = "Hello " + inputName + ", Today is " + _todays_date + ". Have a good day.";
+                document.getElementById('answer').innerHTML = theString;
+                document.getElementById('answer').style.display = "block";
+                return theString;
+
+            } 
+           
+
+    </script>
+  </head>
+<body>
+
+<br/>
+
+  <label>Name:  </label>
+  <input type="text" id="name" />
+  <button type="button" onclick="alert(PrintName(document.getElementById('name').value))">Alert Print</button>
+  <button type="button" onclick="PrintName(document.getElementById('name').value)">Label Print</button>
+  <!--  comment in html  -->
+  <br/>
+  <br/>
+  <label id="answer" style="display:none">Hello ???, Today is  Today's Day. Have a good day.</label>
+</body>
+</html>
